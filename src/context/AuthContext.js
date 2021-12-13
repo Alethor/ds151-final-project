@@ -10,12 +10,14 @@ function authReducer(state,action){
       return({
         ...state,
         signedIn: true,
+        error: false,
         access_token: action.payload
       });
     case "error":
       return({
         ...state,
-        error: action.payload
+        error: true,
+        errorMsg: action.payload
       });
     case "signOut":
       return({
@@ -33,7 +35,8 @@ const AuthProvider = ({children}) => {
   const [authState, dispatch] = useReducer(authReducer, {
     signedIn: false,
     access_token: null,
-    error: ''
+    error: false,
+    errorMsg: ''
   })
 
   const signIn = async ({username, password}) => {
@@ -46,12 +49,13 @@ const AuthProvider = ({children}) => {
           password
         }
       });
-      console.log(response.data);
+
       dispatch({type: 'signIn', paylod: response.data.access_token});
-  
+
     }catch(err){
-      dispatch({type:'error', payload: 'Problemas para autenticar usuario'});
-      console.log(err);
+      console.log("Entrei no catch")
+      dispatch({type:'error', payload: 'Problemas para autenticar usuario, por favor, tente novamente!'});
+
     }
   };
   
