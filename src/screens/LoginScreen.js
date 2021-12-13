@@ -13,12 +13,11 @@ const LoginScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const { authState, signIn} = useContext(AuthContext);
+  const { authState, signIn, tryLocalSignIn} = useContext(AuthContext);
   
   const login = (username, password) => {
     setLoading(true);
     signIn({username, password});
-    console.log(authState);
   }
 
   useEffect(() => {
@@ -35,6 +34,9 @@ const LoginScreen = ({ navigation }) => {
     }
   }, [authState.error]);
 
+  useEffect(() => {
+    tryLocalSignIn();
+  },[]);
   return(
     <View>
       {/* Modal de Loading */}

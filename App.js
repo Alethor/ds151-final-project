@@ -8,19 +8,12 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import Ionicons from '@expo/vector-icons/Ionicons';
 import LoginScreen from './src/screens/LoginScreen';
 import { AuthProvider } from './src/context/AuthContext';
+import { navigationRef } from './RootNavigation';
+import ClientsScreen from './src/screens/ClientsScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-
-
-function Clients(){
-  return(
-    <>
-      <Text>Esse é a lista de clientes</Text>
-    </>
-  )
-}
 
 function Deliverymen(){
   return(
@@ -69,7 +62,7 @@ function Home(){
         },
       })}
     >
-      <Tab.Screen name="Clients" component={Clients} />
+      <Tab.Screen name="Clients" component={ClientsScreen} />
       <Tab.Screen name="Deliveries" component={Deliveries} />
       <Tab.Screen name="Deliverymen" component={Deliverymen} />
      
@@ -81,7 +74,7 @@ function Home(){
 export default function App() {
   return (
     <AuthProvider>
-      <NavigationContainer>
+      <NavigationContainer ref={ navigationRef}>
         <Drawer.Navigator initialRouteName="Login">
           <Drawer.Screen name="Home" component={Home}/>
           <Drawer.Screen name="Login" component={LoginScreen} />

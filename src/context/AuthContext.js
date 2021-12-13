@@ -1,5 +1,7 @@
 import React, { createContext, useReducer} from "react";
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as RootNavigation from "../../RootNavigation";
 
 const AuthContext = createContext(null);
 
@@ -39,6 +41,15 @@ const AuthProvider = ({children}) => {
     errorMsg: ''
   })
 
+  const tryLocalSignIn = async () => {
+    const access_token = await AsyncStorage.getItem('access_token');
+    if(access_token){
+      dispatch({type: 'signIn', paylod: access_token});
+    }else{
+      dispatch({type: 'signOut'});
+      RootNavigation.navigate("Login");
+    }
+  }
   const signIn = async ({username, password}) => {
     try{
       const response = await axios({
@@ -49,18 +60,19 @@ const AuthProvider = ({children}) => {
           password
         }
       });
-
+      console.log(response.data);
+      await AsyncStorage.setItem('access_token', response.data.access_token);
       dispatch({type: 'signIn', paylod: response.data.access_token});
 
     }catch(err){
-      console.log("Entrei no catch")
+      console.log(err)
       dispatch({type:'error', payload: 'Problemas para autenticar usuario, por favor, tente novamente!'});
 
     }
   };
   
   return(
-    <AuthContext.Provider value={{authState, signIn}}>
+    <AuthContext.Provider value={{authState, signIn, tryLocalSignIn}}>
       {children}
     </AuthContext.Provider>
   )
