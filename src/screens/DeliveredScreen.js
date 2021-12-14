@@ -100,36 +100,50 @@ const styles = StyleSheet.create({
   container:{
     flex: 1,
   },
-  containerView:{
-    flexDirection: "row",
-    padding: 10,
-    borderRadius: 10,
-    backgroundColor: '#e1e2e3',
-    alignContent: "center",
-    width: 390,
-    height: 200,
-    margin: 10,
-    
-  },
+
   itemView: {
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
   },
-  textLabel:{
-    fontWeight: "bold",
-    fontSize: 15,    
-    flex: 1,
-  },
-  textContent:{
-    fontSize: 15,
-    flex: 1,
-  },
+
   textView:{
     fontWeight: "bold",
     fontSize: 20,
   },
+
+  containerView:{
+    
+    padding: 5,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    borderColor: '#f0ddee',
+    borderWidth: 2,
+    alignContent: "center",
+    width: 330,
+    height: 200,
+    marginLeft: 15,
+    marginBottom: 15,
+    
+},
+
+
+textLabel:{
+    fontSize: 16,
+    fontWeight: 'bold', 
+    marginLeft: 10,
+    marginTop: 8,
+    color: '#803790'
+
+},
+
+textContent:{
+    marginTop: 5,
+    marginRight: 80,
+    marginLeft: 10,
+    fontSize: 13,
+},
 });
 
 export default DeliveredScreen;

@@ -5,6 +5,7 @@ import deliveryApi from "../api/deliveryapi";
 import Ionicons from '@expo/vector-icons/Ionicons'; 
 
 
+
 const ClientsScreen = ({ navigation }) => {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,6 +23,11 @@ const ClientsScreen = ({ navigation }) => {
     getClients();
     
   }, []);
+
+
+  async function deleteClient(id){
+    await deliveryApi.delete(`/client/deleteClient?id=${id}`);  
+  }
 
 
   if(clients.length == 0){
@@ -52,7 +58,7 @@ const ClientsScreen = ({ navigation }) => {
                   
                   <TouchableOpacity 
                     style={styles.remove}
-                    onPress={() => {setRemove(true)}}
+                    onPress={() => deleteClient(item.id)}
                   >  
                     <Ionicons name='trash-outline' size={35} color='black' />
                   </TouchableOpacity>
@@ -62,11 +68,11 @@ const ClientsScreen = ({ navigation }) => {
         >
         </FlatList>
       </View>
-    </View>
-  
-  
-  )
-  
+        <TouchableOpacity>  
+          <Ionicons name='add-circle' size={35} color='black' />
+        </TouchableOpacity>
+    </View> 
+  ) 
 }
  
 const styles = StyleSheet.create({
