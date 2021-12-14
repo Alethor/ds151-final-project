@@ -5,15 +5,18 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import LoginScreen from './src/screens/LoginScreen';
 import { AuthProvider } from './src/context/AuthContext';
 import { navigationRef } from './RootNavigation';
 import ClientsScreen from './src/screens/ClientsScreen';
+import DeliveredScreen from './src/screens/DeliveredScreen';
+import PendingDeliveriesScreen from './src/screens/PendingDeliveriesScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 const Drawer = createDrawerNavigator();
-
+const TopTab = createMaterialTopTabNavigator();
 
 function Deliverymen(){
   return(
@@ -25,9 +28,10 @@ function Deliverymen(){
 
 function Deliveries(){
   return(
-    <>
-      <Text>Esse é a lista de entregas</Text>
-    </>
+   <TopTab.Navigator>
+     <TopTab.Screen name="Pending" component={PendingDeliveriesScreen}></TopTab.Screen>
+     <TopTab.Screen name="Delivered" component={DeliveredScreen}></TopTab.Screen>
+   </TopTab.Navigator>
   )
 }
 
