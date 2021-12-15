@@ -24,13 +24,6 @@ const Drawer = createDrawerNavigator();
 const TopTab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
 
-function Deliverymen(){
-  return(
-    <>
-      <Text>Esse é a lista de entregadores</Text>
-    </>
-  )
-}
 
 function Deliveries(){
   return(
@@ -42,6 +35,7 @@ function Deliveries(){
   )
 }
 
+//teste
 function Clients(){
   return(
     <Stack.Navigator initialRouteName="Clients" screenOptions={{
