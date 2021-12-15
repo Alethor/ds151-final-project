@@ -53,6 +53,17 @@ function Clients(){
   )
 }
 
+function Deliveryman(){
+  return(
+    <Stack.Navigator initialRouteName="Deliverymen" screenOptions={{
+      headerShown: false       
+    }}>
+      <Stack.Screen name="Deliverymen" component={ColocarTelaAqui} />
+      <Stack.Screen name="NewDeliveryman" component={NewClientScreen} />
+    </Stack.Navigator>
+  )
+}
+
 function Home(){
   return(
     <Tab.Navigator
@@ -86,7 +97,7 @@ function Home(){
         
           <Tab.Screen name="Clients" component={Clients} />
           <Tab.Screen name="Deliveries" component={Deliveries} />
-          <Tab.Screen name="Deliverymen" component={Deliverymen} />    
+          <Tab.Screen name="Deliverymen" component={Deliveryman} />    
         
     </Tab.Navigator>    
   )
