@@ -17,6 +17,7 @@ import PendingDeliveriesScreen from './src/screens/PendingDeliveriesScreen';
 import CustomDrawer from './src/components/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { SessionProvider } from './src/context/SessionContext';
+import NewDeliveryScreen from './src/screens/NewDeliveryScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -35,6 +36,7 @@ function Deliveries(){
   return(
    <TopTab.Navigator>
      <TopTab.Screen name="Pending" component={PendingDeliveriesScreen}></TopTab.Screen>
+     <TopTab.Screen name="New Delivery" component={NewDeliveryScreen} />
      <TopTab.Screen name="Delivered" component={DeliveredScreen}></TopTab.Screen>
    </TopTab.Navigator>
   )
