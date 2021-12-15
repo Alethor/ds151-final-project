@@ -3,6 +3,7 @@ import {Input, Button} from 'react-native-elements';
 import { StyleSheet, Modal, Alert, Pressable, View, ActivityIndicator, FlatList, Text } from "react-native"; 
 import deliveryApi from "../api/deliveryapi"; 
 import SelectDropdown from 'react-native-select-dropdown'
+import * as RootNavigation from "../../RootNavigation";
 
 
 
@@ -13,8 +14,7 @@ const NewDeliveryScreen = ({ navigation }) => {
   const [selectedClient, setSelectedClient] = useState({});
   const [selectedDeliveryman, setSelectedDeliveryman] = useState({});
   const [description, setDescription] = useState('');
-  const [erro, setErro] = useState(false);
-  const [msgErro, setMsgErro] = useState('');
+
 
   const getClients = async () => {
     try{
@@ -48,6 +48,7 @@ const NewDeliveryScreen = ({ navigation }) => {
     }catch(err){
       console.log(err);
     }
+    RootNavigation.navigate("Pending");
   }
 
 

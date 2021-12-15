@@ -6,18 +6,20 @@ import deliveryApi from "../api/deliveryapi";
 
 const DeliveredScreen = ({ navigation }) => {
   const [deliveries, setDeliveries] = useState([]);
-  const [loading, setLoading] = useState(true);
+
 
   async function getDeliveries(){
     const response = await deliveryApi.get("/delivery/listAllDeliveredByAssociate");
     if(response.data.deliveries){
       setDeliveries(response.data.deliveries);
     }
-    setLoading(false);
+
   }
 
   useEffect(() => {
-    getDeliveries();
+    navigation.addListener('focus', () => {
+      getDeliveries();
+    });
   }, []);
 
 
@@ -30,22 +32,6 @@ const DeliveredScreen = ({ navigation }) => {
   }
   return(
     <SafeAreaView>
-      <View style={styles.centeredView} >
-        <Modal 
-          animationType="slide" 
-          transparent={true} 
-          visible={loading}
-          onRequestClose={() => {setLoading(!loading)}}>
-          
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <ActivityIndicator size="large" color="#694fad" />
-              <Text style={styles.modalText} >Carregando...</Text>
-            </View>
-          </View>
-         
-         </Modal>
-       </View>
       <View style={styles.grid}>
         <FlatList
           data={deliveries}
@@ -55,7 +41,7 @@ const DeliveredScreen = ({ navigation }) => {
               
                 <View style={styles.containerView}>
                 <TouchableOpacity style={styles.container} onPress={() => {}}>
-                  <Text style={styles.textLabel}>Descrição</Text>
+                  <Text style={styles.textLabel}>DescriÃ§Ã£o</Text>
 					        <Text style={styles.textContent}>{item.description}</Text>
                   <Text style={styles.textLabel}>Valor</Text>
                   <Text style={styles.textContent}>{item.value}</Text>

@@ -8,19 +8,19 @@ import deliveryApi from "../api/deliveryapi";
 
 const PendingDeliveriesScreen = ({ navigation }) => {
   const [deliveries, setDeliveries] = useState([])
-  const [loading, setLoading] = useState(true);
+
   
+  async function getDeliveries(){
+    const response = await deliveryApi.get("/delivery/listAllPending");
+    if(response.data.deliveries){
+      setDeliveries(response.data.deliveries);
+    }
+  }
 
   useEffect(() => {
-    async function getDeliveries(){
-      const response = await deliveryApi.get("/delivery/listAllPending");
-      if(response.data.deliveries){
-        setDeliveries(response.data.deliveries);
-      }
-      setLoading(false);
-    }
-
-    getDeliveries();
+    navigation.addListener('focus', () => {
+      getDeliveries();
+    });
     
   }, []);
 
@@ -36,22 +36,6 @@ const PendingDeliveriesScreen = ({ navigation }) => {
   }else{
       return(
         <SafeAreaView>
-        <View style={styles.centeredView} >
-          <Modal 
-            animationType="slide" 
-            transparent={true} 
-            visible={loading}
-            onRequestClose={() => {setLoading(!loading)}}>
-            
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <ActivityIndicator size="large" color="#694fad" />
-                <Text style={styles.modalText} >Carregando...</Text>
-              </View>
-            </View>
-           
-           </Modal>
-         </View>
         <View style={styles.grid}>
           <FlatList
             data={deliveries}
