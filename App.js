@@ -101,7 +101,7 @@ export default function App() {
         <Drawer.Navigator 
           drawerContent={ props => <CustomDrawer {...props} />}  
           screenOptions={{
-            headerShown: false,
+           
             drawerActiveBackgroundColor: '#694fad',
             drawerActiveTintColor: '#fff',
             drawerInactiveTintColor: '#333'
@@ -120,7 +120,7 @@ export default function App() {
 
             )
           }}/>
-          <Drawer.Screen options={{headerShown: false}} name="NewClient" component={NewClientScreen}options={{
+          <Drawer.Screen name="NewClient" component={NewClientScreen}options={{
             drawerIcon: ({ color }) => (
               <Ionicons name='person-add-outline' size={22} color={color} />
             )
