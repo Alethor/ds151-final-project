@@ -79,12 +79,14 @@ const DeliveredScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+ 
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22
   },
+
   modalView: {
     margin: 20,
     backgroundColor: "white",
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
       height: 2
     },
   },
+  
   container:{
     flex: 1,
   },
@@ -114,17 +117,17 @@ const styles = StyleSheet.create({
   },
 
   containerView:{
-    
+    flex: 1,
+    alignSelf: 'center',
+    marginTop: 10, 
     padding: 5,
     borderRadius: 10,
     backgroundColor: 'white',
     borderColor: '#f0ddee',
     borderWidth: 2,
     alignContent: "center",
-    width: 330,
+    width: 340,
     height: 200,
-    marginLeft: 15,
-    marginBottom: 15,
     
 },
 

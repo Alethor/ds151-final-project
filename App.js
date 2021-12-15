@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -11,6 +12,7 @@ import { AuthProvider } from './src/context/AuthContext';
 import { navigationRef } from './RootNavigation';
 import ClientsScreen from './src/screens/ClientsScreen';
 import DeliveredScreen from './src/screens/DeliveredScreen';
+import NewClientScreen from './src/screens/NewClientScreen';
 import PendingDeliveriesScreen from './src/screens/PendingDeliveriesScreen';
 import CustomDrawer from './src/components/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -18,11 +20,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const Tab = createMaterialBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 const TopTab = createMaterialTopTabNavigator();
+const Stack = createStackNavigator();
 
 function Deliverymen(){
   return(
     <>
-      <Text>Esse é a lista de entregadores</Text>
+      <Text>Esse Ã© a lista de entregadores</Text>
     </>
   )
 }
@@ -67,17 +70,27 @@ function Home(){
         },
       })}
     >
-      <Tab.Screen name="Clients" component={ClientsScreen} />
-      <Tab.Screen name="Deliveries" component={Deliveries} />
-      <Tab.Screen name="Deliverymen" component={Deliverymen} />
-     
+        
+          <Tab.Screen name="Clients" component={ClientsScreen} />
+          <Tab.Screen name="Deliveries" component={Deliveries} />
+          <Tab.Screen name="Deliverymen" component={Deliverymen} />    
+        
+    </Tab.Navigator>    
+  )
+}
 
-    </Tab.Navigator>
+function NewClient(){
+  return(
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="New Client" component={NewClientScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 const LogoutButton = () => {
   return(
-    <Text>Botão</Text>
+    <Text>Botï¿½o</Text>
   )
 }
 
@@ -107,6 +120,12 @@ export default function App() {
 
             )
           }}/>
+          <Drawer.Screen options={{headerShown: false}} name="NewClient" component={NewClientScreen}options={{
+            drawerIcon: ({ color }) => (
+              <Ionicons name='person-add-outline' size={22} color={color} />
+            )
+          }}/>
+          
         </Drawer.Navigator>
       </NavigationContainer>
     </AuthProvider>

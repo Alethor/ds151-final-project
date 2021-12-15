@@ -34,13 +34,34 @@ const ClientsScreen = ({ navigation }) => {
     return(
       <View>
         <Text styles={styles.textView}>No clients yet!</Text>
+          <TouchableOpacity
+            style={styles.add}
+            onPress={() => navigation.navigate("NewClient")}
+          >  
+            <Ionicons name='add-circle' size={65} color='lightblue' />
+          </TouchableOpacity>
       </View>
     )
   }  
   
   return(
     <View>
-      
+       <View style={styles.centeredView} >
+        <Modal 
+          animationType="slide" 
+          transparent={true} 
+          visible={loading}
+          onRequestClose={() => {setLoading(!loading)}}>
+          
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <ActivityIndicator size="large" color="#694fad" />
+              <Text style={styles.modalText} >Carregando...</Text>
+            </View>
+          </View>
+         
+         </Modal>
+       </View>
       <View style={styles.grid}>
         <FlatList
           data={clients}
@@ -68,8 +89,11 @@ const ClientsScreen = ({ navigation }) => {
         >
         </FlatList>
       </View>
-        <TouchableOpacity>  
-          <Ionicons name='add-circle' size={35} color='black' />
+        <TouchableOpacity
+          style={styles.add}
+          onPress={() => navigation.navigate("NewClient")}
+        >  
+          <Ionicons name='add-circle' size={35} color='blue' />
         </TouchableOpacity>
     </View> 
   ) 
@@ -84,17 +108,18 @@ grid:{
 },
 
 containerView:{
-    
+    flex: 1,
+    alignSelf: 'center',
+    marginTop: 10,   
     padding: 5,
     borderRadius: 10,
     backgroundColor: 'white',
     borderColor: '#f0ddee',
     borderWidth: 2,
     alignContent: "center",
-    width: 330,
+    width: 340,
     height: 105,
-    marginLeft: 15,
-    marginBottom: 10,
+
 },
 
 containerTouchable:{
@@ -102,8 +127,14 @@ containerTouchable:{
 },
 
 remove:{
-  marginLeft: 250,
+  alignSelf: 'flex-end',
   marginTop: -55,
+},
+
+add:{
+  marginTop:470,
+  marginLeft:300
+
 },
 
 textLabel:{
@@ -127,6 +158,7 @@ centeredView: {
   alignItems: "center",
   marginTop: 22
 },
+
 modalView: {
   margin: 20,
   backgroundColor: "white",
