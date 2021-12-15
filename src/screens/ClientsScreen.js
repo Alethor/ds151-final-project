@@ -26,8 +26,13 @@ const ClientsScreen = ({ navigation }) => {
 
 
   async function deleteClient(id){
-    await deliveryApi.delete(`/client/deleteClient?id=${id}`);  
-    getClients();
+    try{
+      await deliveryApi.delete(`/client/deleteClient?id=${id}`);  
+      getClients();
+    }catch(e){
+      console.log(e);
+    }
+    
   }
 
 
@@ -41,7 +46,7 @@ const ClientsScreen = ({ navigation }) => {
             style={styles.add}
             onPress={() => navigation.navigate("NewClient")}
           >  
-            <Ionicons name='add-circle' size={65} color='lightblue' />
+            <Ionicons name='add-circle' size={65} color='orange' />
           </TouchableOpacity>
       </View>
     )
@@ -65,9 +70,7 @@ const ClientsScreen = ({ navigation }) => {
          
          </Modal>
        </View>
-       <View>
-         <Button title="Novo Cliente" onPress={() => navigation.navigate("NewClient")}></Button>
-       </View>
+
       <View style={styles.grid}>
         <FlatList
           data={clients}
@@ -95,14 +98,14 @@ const ClientsScreen = ({ navigation }) => {
         >
         </FlatList>
       </View>
-      {/* <View>
+     <View>
           <TouchableOpacity
-            style={styles.add}
+            style={styles.add1}
             onPress={() => navigation.navigate("NewClient")}
           >  
-            <Ionicons name='add-circle' size={65} color='lightblue' />
+            <Ionicons name='add-circle' size={65} color='orange' />
           </TouchableOpacity>
-      </View> */}
+      </View> 
     </View> 
   ) 
 }
@@ -143,6 +146,17 @@ add:{
   marginTop:470,
   marginLeft:300
 
+},
+
+add1:{
+  marginTop:100,
+  marginLeft:300
+
+},
+
+add1:{
+
+  marginLeft:315
 },
 
 textLabel:{
