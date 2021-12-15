@@ -11,7 +11,7 @@ const PendingDeliveriesScreen = ({ navigation }) => {
 
   
   async function getDeliveries(){
-    const response = await deliveryApi.get("/delivery/listAllPending");
+    const response = await deliveryApi.get("/delivery/listAllPendingByAssociate");
     if(response.data.deliveries){
       setDeliveries(response.data.deliveries);
     }
