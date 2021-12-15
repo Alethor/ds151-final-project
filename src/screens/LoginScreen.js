@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Text, Input, Button} from 'react-native-elements';
-import { StyleSheet, Modal, Alert, Pressable, View, ActivityIndicator } from "react-native";  
+import { StyleSheet, Modal, Alert, Pressable, View, ActivityIndicator, Image } from "react-native";  
 import { AuthContext } from '../context/AuthContext';
 
 
@@ -9,7 +9,6 @@ const LoginScreen = ({ navigation }) => {
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -82,7 +81,10 @@ const LoginScreen = ({ navigation }) => {
        </View>
 
       {/* Corpo da Tela */}
-      <View>
+      <View style={styles.centeredBody} >
+        <View style={styles.imagem}>
+          <Image style={styles.imagem} source={require('../../images/logoapi.png') } />
+        </View>
         <Input
           placeholder="cnpj"
           onChangeText={(value) => setUsername(value)}
@@ -101,7 +103,6 @@ const LoginScreen = ({ navigation }) => {
             login(username, password)
           }}
         />
-        
       </View>
     </View>
   )
@@ -114,6 +115,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22
+  },
+  centeredBody: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+
   },
   modalView: {
     margin: 20,
@@ -158,7 +165,18 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: "center",
     fontWeight: "bold"
-  }
+  },
+  container:{
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+  imagem:{
+    alignSelf: 'center',
+    width: 250,
+    height: 200,
+
+  },
 });
 
 export default LoginScreen;
