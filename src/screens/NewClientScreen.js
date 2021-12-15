@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, } from 'react';
 import { Input, Button} from 'react-native-elements';
-import { StyleSheet, Modal, Alert, View, Pressable } from "react-native"; 
+import { StyleSheet, View} from "react-native"; 
 import deliveryApi from "../api/deliveryapi";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Icon from 'react-native-vector-icons/FontAwesome';    
@@ -16,14 +16,16 @@ const NewClientScreen = ({ navigation }) => {
     const insets = useSafeAreaInsets();
 
     async function postClient(){
-
+      try{
         const response = await deliveryApi.post("/client/newClient", {
           
             companyName: companyName,
             cnpj: cnpj,
             address: address,
-
         }); 
+      }catch(err){
+        console.log(err);
+      }
 
     }
     
@@ -73,11 +75,11 @@ const NewClientScreen = ({ navigation }) => {
             />               
         </View>
         <View style={styles.confirm}>      
-        <Button
-          buttonStyle={styles.buttonLogin}
-          title="Confirmar"
-          onPress={postClient() }
-        />
+          <Button
+            buttonStyle={styles.buttonLogin}
+            title="Confirmar"
+            onPress={() => {postClient()} }
+          />
         </View> 
         </View> 
     ) 
