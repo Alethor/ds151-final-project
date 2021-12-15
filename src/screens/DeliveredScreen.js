@@ -55,7 +55,7 @@ const DeliveredScreen = ({ navigation }) => {
               
                 <View style={styles.containerView}>
                 <TouchableOpacity style={styles.container} onPress={() => {}}>
-                  <Text style={styles.textLabel}>DescriÃ§Ã£o:</Text>
+                  <Text style={styles.textLabel}>Descrição</Text>
 					        <Text style={styles.textContent}>{item.description}</Text>
                   <Text style={styles.textLabel}>Valor</Text>
                   <Text style={styles.textContent}>{item.value}</Text>

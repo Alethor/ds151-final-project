@@ -61,9 +61,9 @@ const PendingDeliveriesScreen = ({ navigation }) => {
                 
                   <View style={styles.containerView}>
                   <TouchableOpacity style={styles.container} onPress={() => {}}>
-                    <Text style={styles.textLabel}>ID:</Text>
+                    <Text style={styles.textLabel}>ID</Text>
                     <Text style={styles.textContent}>{item.id}</Text>
-                    <Text style={styles.textLabel}>Descrição:</Text>
+                    <Text style={styles.textLabel}>Descrição</Text>
                     <Text style={styles.textContent}>{item.description}</Text>
                   </TouchableOpacity>
                   
