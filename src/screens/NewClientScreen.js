@@ -3,8 +3,9 @@ import { Text, Input, Button} from 'react-native-elements';
 import { StyleSheet, Modal, Alert, View, Pressable } from "react-native"; 
 import deliveryApi from "../api/deliveryapi";
 import { AuthContext } from '../context/AuthContext';
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Ionicons from '@expo/vector-icons/Ionicons'; 
-
+    
 
 
 const NewClientScreen = ({ navigation }) => {
@@ -15,18 +16,16 @@ const NewClientScreen = ({ navigation }) => {
     const [error, setError] = useState(false);
     const { authState} = useContext(AuthContext);
 
+    const insets = useSafeAreaInsets();
 
     async function postClient(){
 
-            const response = await deliveryApi.post("/client/newClient", {
-                companyName,
-                cnpj,
-                address
-            }); 
-            console.log("entrou no try") 
-        
-        
-      }
+        const response = await deliveryApi.post("/client/newClient", {
+            companyName,
+            cnpj,
+            address
+        }); 
+    }
     
     return(
         <View>

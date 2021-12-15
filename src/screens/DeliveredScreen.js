@@ -49,14 +49,14 @@ const DeliveredScreen = ({ navigation }) => {
          
          </Modal>
        </View>
-      <View>
+      <View style={styles.grid}>
         <FlatList
           data={deliveries}
           keyExtractor={item => item.id}
           renderItem={({item}) => {
             return(
               
-              	<View style={styles.containerView}>
+                <View style={styles.containerView}>
                 <TouchableOpacity style={styles.container} onPress={() => {}}>
                   <Text style={styles.textLabel}>Descrição:</Text>
 					        <Text style={styles.textContent}>{item.description}</Text>
@@ -65,7 +65,9 @@ const DeliveredScreen = ({ navigation }) => {
                   <Text style={styles.textLabel}>Data</Text>
                   <Text style={styles.textContent}>{item.deliveredAt}</Text>
                 </TouchableOpacity>
-                </View>
+                
+              </View>
+              	
             )
           }}
         >
@@ -79,7 +81,10 @@ const DeliveredScreen = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
- 
+  grid:{
+    marginBottom: 50,
+  },
+
   centeredView: {
     flex: 1,
     justifyContent: "center",
