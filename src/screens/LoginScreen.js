@@ -3,7 +3,7 @@ import { Text, Input, Button} from 'react-native-elements';
 import { StyleSheet, Modal, Alert, Pressable, View, ActivityIndicator, Image } from "react-native";  
 import { AuthContext } from '../context/AuthContext';
 import { SessionContext } from '../context/SessionContext';
-
+import Icon from 'react-native-vector-icons/FontAwesome'; 
 
 
 
@@ -63,7 +63,7 @@ const LoginScreen = ({ navigation }) => {
          </Modal>
        </View>
 
-      {/* Modal de Erro de Autenticação */}
+      {/* Modal de Erro de Autenticaï¿½ï¿½o */}
        <View style={styles.centeredView} >
         <Modal 
           animationType="slide" 
@@ -93,15 +93,29 @@ const LoginScreen = ({ navigation }) => {
           <Image style={styles.imagem} source={require('../../images/logoapi.png') } />
         </View>
         <Input
-          placeholder="cnpj"
+          placeholder="  cnpj"
           onChangeText={(value) => setUsername(value)}
           value={username}
+          leftIcon={
+            <Icon
+              name='user'
+              size={25}
+              color='#694fad'
+            />
+          }
         />
         <Input
-          placeholder="password"
+          placeholder="  password"
           onChangeText={(value) => setPassword(value)}
           value={password}
           secureTextEntry={true}
+          leftIcon={
+            <Icon
+              name='lock'
+              size={25}
+              color='#694fad'
+            />
+          }
         />
         <Button
           buttonStyle={styles.buttonLogin}
