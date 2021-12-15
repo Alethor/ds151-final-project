@@ -6,13 +6,14 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import LoginScreen from './src/screens/LoginScreen';
 import { AuthProvider } from './src/context/AuthContext';
 import { navigationRef } from './RootNavigation';
 import ClientsScreen from './src/screens/ClientsScreen';
 import DeliveredScreen from './src/screens/DeliveredScreen';
 import PendingDeliveriesScreen from './src/screens/PendingDeliveriesScreen';
+import CustomDrawer from './src/components/CustomDrawer';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createMaterialBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -74,14 +75,38 @@ function Home(){
     </Tab.Navigator>
   )
 }
+const LogoutButton = () => {
+  return(
+    <Text>Botão</Text>
+  )
+}
 
 export default function App() {
   return (
     <AuthProvider>
       <NavigationContainer ref={ navigationRef}>
-        <Drawer.Navigator initialRouteName="Login">
-          <Drawer.Screen name="Home" component={Home}/>
-          <Drawer.Screen name="Login" component={LoginScreen} />
+        <Drawer.Navigator 
+          drawerContent={ props => <CustomDrawer {...props} />}  
+          screenOptions={{
+            headerShown: false,
+            drawerActiveBackgroundColor: '#694fad',
+            drawerActiveTintColor: '#fff',
+            drawerInactiveTintColor: '#333'
+          }}
+          initialRouteName="Login"
+        >
+          <Drawer.Screen name="Home" component={Home} options={{
+            drawerIcon: ({ color }) => (
+              <Ionicons name='home-outline' size={22} color={color} />
+
+            )
+          }}/>
+          <Drawer.Screen options={{headerShown: false}} name="Login" component={LoginScreen}options={{
+            drawerIcon: ({ color }) => (
+              <Ionicons name='log-in-outline' size={22} color={color} />
+
+            )
+          }}/>
         </Drawer.Navigator>
       </NavigationContainer>
     </AuthProvider>

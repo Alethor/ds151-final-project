@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Input, Button} from 'react-native-elements';
-import { StyleSheet, Modal, Alert, Pressable, View, ActivityIndicator, FlatList, TouchableOpacity } from "react-native"; 
+import { StyleSheet, Modal, Alert, Pressable, View, ActivityIndicator, FlatList, TouchableOpacity, SafeAreaView } from "react-native"; 
 import deliveryApi from "../api/deliveryapi"; 
 
 
@@ -32,7 +32,7 @@ const DeliveredScreen = ({ navigation }) => {
     )
   }
   return(
-    <View>
+    <SafeAreaView>
       <View style={styles.centeredView} >
         <Modal 
           animationType="slide" 
@@ -72,7 +72,7 @@ const DeliveredScreen = ({ navigation }) => {
 
         </FlatList>
       </View>
-    </View>
+    </SafeAreaView>
   
   )
   
