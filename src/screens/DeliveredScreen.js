@@ -12,7 +12,7 @@ const DeliveredScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
 
   async function getDeliveries(){
-    const response = await deliveryApi.get("/delivery/listAllDelivered");
+    const response = await deliveryApi.get("/delivery/listAllDeliveredByAssociate");
     if(response.data.deliveries){
       setDeliveries(response.data.deliveries);
     }
