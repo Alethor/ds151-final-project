@@ -9,17 +9,17 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 const ClientsScreen = ({ navigation }) => {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [remove, setRemove] = useState(false);
   
-  useEffect(() => {
-    async function getClients(){
-      const responseClients = await deliveryApi.get("/client/listAllClientsByAssociate");
-      if(responseClients.data.clients){
-        setClients(responseClients.data.clients);
-      }
-      setLoading(false);
+  async function getClients(){
+    const responseClients = await deliveryApi.get("/client/listAllClientsByAssociate");
+    if(responseClients.data.clients){
+      setClients(responseClients.data.clients);
     }
+    setLoading(false);
+  }
 
+  useEffect(() => {
+    setLoading(true);
     getClients();
     
   }, []);
@@ -27,15 +27,16 @@ const ClientsScreen = ({ navigation }) => {
 
   async function deleteClient(id){
     await deliveryApi.delete(`/client/deleteClient?id=${id}`);  
+    getClients();
   }
 
 
   if(clients.length == 0){
     return(
       <View>
-        <View style={styles.viewAviso}>
-          <Text>No peding deliveries yet!</Text>
-        </View>
+        
+          <Text style={{alignSelf: 'center', textAlignVertical: 'center'}}>No clients yet!</Text>
+        
           <TouchableOpacity
             style={styles.add}
             onPress={() => navigation.navigate("NewClient")}

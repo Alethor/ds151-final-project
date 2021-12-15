@@ -27,7 +27,7 @@ const DeliveredScreen = ({ navigation }) => {
   if(deliveries.length == 0){
     return(
       <View style={styles.viewAviso}>
-        <Text>No peding deliveries yet!</Text>
+        <Text>No deliveries yet!</Text>
       </View>
     )
   }
