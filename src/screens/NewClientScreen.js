@@ -2,10 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Text, Input, Button} from 'react-native-elements';
 import { StyleSheet, Modal, Alert, View, Pressable } from "react-native"; 
 import deliveryApi from "../api/deliveryapi";
-import { AuthContext } from '../context/AuthContext';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Ionicons from '@expo/vector-icons/Ionicons'; 
-    
+import Icon from 'react-native-vector-icons/FontAwesome';    
 
 
 const NewClientScreen = ({ navigation }) => {
@@ -14,7 +12,6 @@ const NewClientScreen = ({ navigation }) => {
     const [cnpj, setCnpj] = useState("")
     const [address, setAddress] = useState("")  
     const [error, setError] = useState(false);
-    const { authState} = useContext(AuthContext);
 
     const insets = useSafeAreaInsets();
 
@@ -37,7 +34,14 @@ const NewClientScreen = ({ navigation }) => {
             <Input 
                 placeholder = "Company Name"
                 style = {styles.textInput}
-                onChangeText={(name) => setCompany(name)}            
+                onChangeText={(name) => setCompany(name)} 
+                leftIcon={
+                    <Icon
+                      name='user'
+                      size={24}
+                      color='black'
+                    />
+                }           
             />
                         
             <Input 
@@ -50,6 +54,7 @@ const NewClientScreen = ({ navigation }) => {
                 placeholder = "Address"
                 style = {styles.textInput}
                 onChangeText={(ad) => setAddress(ad)}  
+                
                        
             />               
         </View>
