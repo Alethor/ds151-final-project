@@ -1,24 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity} from 'react-native';
 import {DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { AuthContext } from '../context/AuthContext';
+import * as RootNavigation from "../../RootNavigation";
+import { SessionContext } from '../context/SessionContext';
 
 
 const CustomDrawer = (props) => {
+ const { authState, signOut } = useContext(AuthContext);
+ const { sessionState} = useContext(SessionContext);
+
+ const logout = () => {
+  signOut();
+  RootNavigation.navigate("Login");
+ }
+
+ 
+
   return(
     <View style={styles.firstView}>
       <DrawerContentScrollView contentContainerStyle={{backgroundColor: '#694fad'}}>
         <ImageBackground source={require("../../images/menu-bg.jpeg")} style={styles.bgImage}>
           <Image source={require("../../images/profile.png")} style={styles.profileImage} />
-          <Text style={styles.profileText}>Nome do Associado</Text>
-          <Text style={styles.profileSubText}>CNPJ do Associado</Text>
+          
+          {authState.signedIn  ?  <Text style={styles.profileText}>{sessionState.companyName}</Text>  : <Text style={styles.profileText}>Realize Login</Text>}
+          {authState.signedIn  ?  <Text style={styles. profileSubText}>CNPJ: {sessionState.cnpj}</Text>  : null}
+        
+        
         </ImageBackground>
         <View style={styles.secondView}>
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
       <View style={styles.thirdView}>
-        <TouchableOpacity style={styles.firstTouchable}  onPress={() => {}}>
+        <TouchableOpacity style={styles.firstTouchable}  onPress={() => {logout()}}>
           <View style={styles.fourthView}>
             <Ionicons name='log-out-outline' size={22} />
             <Text style={styles.logoutText} >Logout</Text>

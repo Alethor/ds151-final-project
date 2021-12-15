@@ -3,6 +3,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as RootNavigation from "../../RootNavigation";
 
+
 const AuthContext = createContext(null);
 
 function authReducer(state,action){
@@ -49,7 +50,8 @@ const AuthProvider = ({children}) => {
       dispatch({type: 'signOut'});
       RootNavigation.navigate("Login");
     }
-  }
+  };
+
   const signIn = async ({username, password}) => {
     try{
       const response = await axios({
@@ -60,7 +62,7 @@ const AuthProvider = ({children}) => {
           password
         }
       });
-      console.log(response.data);
+
       await AsyncStorage.setItem('access_token', response.data.access_token);
       dispatch({type: 'signIn', paylod: response.data.access_token});
 
@@ -71,8 +73,15 @@ const AuthProvider = ({children}) => {
     }
   };
   
+  const signOut = async() => {
+    
+    dispatch({type:'signOut'});
+    await AsyncStorage.removeItem('access_token');
+  
+  };
+  
   return(
-    <AuthContext.Provider value={{authState, signIn, tryLocalSignIn}}>
+    <AuthContext.Provider value={{authState, signIn, tryLocalSignIn, signOut}}>
       {children}
     </AuthContext.Provider>
   )

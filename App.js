@@ -16,6 +16,7 @@ import NewClientScreen from './src/screens/NewClientScreen';
 import PendingDeliveriesScreen from './src/screens/PendingDeliveriesScreen';
 import CustomDrawer from './src/components/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { SessionProvider } from './src/context/SessionContext';
 
 const Tab = createMaterialBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -97,37 +98,39 @@ const LogoutButton = () => {
 export default function App() {
   return (
     <AuthProvider>
-      <NavigationContainer ref={ navigationRef}>
-        <Drawer.Navigator 
-          drawerContent={ props => <CustomDrawer {...props} />}  
-          screenOptions={{
-           
-            drawerActiveBackgroundColor: '#694fad',
-            drawerActiveTintColor: '#fff',
-            drawerInactiveTintColor: '#333'
-          }}
-          initialRouteName="Login"
-        >
-          <Drawer.Screen name="Home" component={Home} options={{
-            drawerIcon: ({ color }) => (
-              <Ionicons name='home-outline' size={22} color={color} />
-
-            )
-          }}/>
-          <Drawer.Screen options={{headerShown: false}} name="Login" component={LoginScreen}options={{
-            drawerIcon: ({ color }) => (
-              <Ionicons name='log-in-outline' size={22} color={color} />
-
-            )
-          }}/>
-          <Drawer.Screen name="NewClient" component={NewClientScreen}options={{
-            drawerIcon: ({ color }) => (
-              <Ionicons name='person-add-outline' size={22} color={color} />
-            )
-          }}/>
-          
-        </Drawer.Navigator>
-      </NavigationContainer>
+      <SessionProvider>
+        <NavigationContainer ref={ navigationRef}>
+          <Drawer.Navigator 
+            drawerContent={ props => <CustomDrawer {...props} />}  
+            screenOptions={{
+            
+              drawerActiveBackgroundColor: '#694fad',
+              drawerActiveTintColor: '#fff',
+              drawerInactiveTintColor: '#333'
+            }}
+            initialRouteName="Login"
+          >
+            <Drawer.Screen name="Home" component={Home} options={{
+              drawerIcon: ({ color }) => (
+                <Ionicons name='home-outline' size={22} color={color} />
+              
+              )
+            }}/>
+            <Drawer.Screen options={{headerShown: false}} name="Login" component={LoginScreen}options={{
+              drawerIcon: ({ color }) => (
+                <Ionicons name='log-in-outline' size={22} color={color} />
+              
+              )
+            }}/>
+            <Drawer.Screen name="NewClient" component={NewClientScreen}options={{
+              drawerIcon: ({ color }) => (
+                <Ionicons name='person-add-outline' size={22} color={color} />
+              )
+            }}/>
+            
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </SessionProvider>
     </AuthProvider>
   );
 }

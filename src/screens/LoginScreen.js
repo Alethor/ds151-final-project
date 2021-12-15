@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Text, Input, Button} from 'react-native-elements';
 import { StyleSheet, Modal, Alert, Pressable, View, ActivityIndicator, Image } from "react-native";  
 import { AuthContext } from '../context/AuthContext';
+import { SessionContext } from '../context/SessionContext';
+
 
 
 
@@ -13,14 +15,19 @@ const LoginScreen = ({ navigation }) => {
   const [error, setError] = useState(false);
 
   const { authState, signIn, tryLocalSignIn} = useContext(AuthContext);
+  const { sessionState, sessionSignIn} = useContext(SessionContext);
   
-  const login = (username, password) => {
+  const login = async (username, password) => {
     setLoading(true);
-    signIn({username, password});
+    await signIn({username, password});
+    await sessionSignIn();
   }
+
+  
 
   useEffect(() => {
     if(authState.signedIn){
+      sessionSignIn();
       setLoading(false);
       navigation.navigate("Home");
     }
