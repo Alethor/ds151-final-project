@@ -21,10 +21,13 @@ const NewClientScreen = ({ navigation }) => {
     async function postClient(){
 
         const response = await deliveryApi.post("/client/newClient", {
-            companyName,
-            cnpj,
-            address
+          
+            companyName: companyName,
+            cnpj: cnpj,
+            address: address,
+
         }); 
+
     }
     
     return(
@@ -48,11 +51,11 @@ const NewClientScreen = ({ navigation }) => {
                 style = {styles.textInput}
                 onChangeText={(ad) => setAddress(ad)}  
                        
-            />                 
+            />               
         </View>
                     
         <Button 
-            title={"Conformar"}
+            title={"Confirmar"}
             color="purple"
             onPress={() => postClient()}>
         </Button>

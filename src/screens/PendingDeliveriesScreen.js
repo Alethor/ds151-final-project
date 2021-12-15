@@ -28,8 +28,8 @@ const PendingDeliveriesScreen = ({ navigation }) => {
 
   if(deliveries.length == 0){
     return(
-      <View>
-        <Text styles={styles.textView}>No peding deliveries yet!</Text>
+      <View style={styles.viewAviso}>
+        <Text>No peding deliveries yet!</Text>
       </View>
       
     )
@@ -87,6 +87,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 22
   },
+  viewAviso:{
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },  
   modalView: {
     margin: 20,
     backgroundColor: "white",
@@ -109,7 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e1e2e3',
     alignContent: "center",
     width: 390,
-    height: 120,
+    height: 400,
     margin: 10,
     
   },

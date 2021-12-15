@@ -33,7 +33,9 @@ const ClientsScreen = ({ navigation }) => {
   if(clients.length == 0){
     return(
       <View>
-        <Text styles={styles.textView}>No clients yet!</Text>
+        <View style={styles.viewAviso}>
+          <Text>No peding deliveries yet!</Text>
+        </View>
           <TouchableOpacity
             style={styles.add}
             onPress={() => navigation.navigate("NewClient")}
@@ -62,6 +64,9 @@ const ClientsScreen = ({ navigation }) => {
          
          </Modal>
        </View>
+       <View>
+         <Button title="Novo Cliente" onPress={() => navigation.navigate("NewClient")}></Button>
+       </View>
       <View style={styles.grid}>
         <FlatList
           data={clients}
@@ -89,12 +94,14 @@ const ClientsScreen = ({ navigation }) => {
         >
         </FlatList>
       </View>
-        <TouchableOpacity
-          style={styles.add}
-          onPress={() => navigation.navigate("NewClient")}
-        >  
-          <Ionicons name='add-circle' size={35} color='blue' />
-        </TouchableOpacity>
+      {/* <View>
+          <TouchableOpacity
+            style={styles.add}
+            onPress={() => navigation.navigate("NewClient")}
+          >  
+            <Ionicons name='add-circle' size={65} color='lightblue' />
+          </TouchableOpacity>
+      </View> */}
     </View> 
   ) 
 }
@@ -117,7 +124,7 @@ containerView:{
     borderColor: '#f0ddee',
     borderWidth: 2,
     alignContent: "center",
-    width: 340,
+    width: 400,
     height: 105,
 
 },
@@ -157,6 +164,12 @@ centeredView: {
   justifyContent: "center",
   alignItems: "center",
   marginTop: 22
+},
+
+viewAviso:{
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
 },
 
 modalView: {

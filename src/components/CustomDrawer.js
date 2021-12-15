@@ -25,7 +25,7 @@ const CustomDrawer = (props) => {
           <Image source={require("../../images/profile.png")} style={styles.profileImage} />
           
           {authState.signedIn  ?  <Text style={styles.profileText}>{sessionState.companyName}</Text>  : <Text style={styles.profileText}>Realize Login</Text>}
-          {authState.signedIn  ?  <Text style={styles. profileSubText}>CNPJ: {sessionState.cnpj}</Text>  : null}
+          {authState.signedIn  ?  <Text style={styles. profileSubText}>{sessionState.cnpj}</Text>  : null}
         
         
         </ImageBackground>

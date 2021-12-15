@@ -40,6 +40,16 @@ function Deliveries(){
   )
 }
 
+function Clients(){
+  return(
+    <Stack.Navigator initialRouteName="Clients" screenOptions={{
+      headerShown: false       
+    }}>
+      <Stack.Screen name="Client" component={ClientsScreen} />
+      <Stack.Screen name="NewClient" component={NewClientScreen} />
+    </Stack.Navigator>
+  )
+}
 
 function Home(){
   return(
@@ -72,7 +82,7 @@ function Home(){
       })}
     >
         
-          <Tab.Screen name="Clients" component={ClientsScreen} />
+          <Tab.Screen name="Clients" component={Clients} />
           <Tab.Screen name="Deliveries" component={Deliveries} />
           <Tab.Screen name="Deliverymen" component={Deliverymen} />    
         
@@ -80,20 +90,6 @@ function Home(){
   )
 }
 
-function NewClient(){
-  return(
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="New Client" component={NewClientScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
-}
-const LogoutButton = () => {
-  return(
-    <Text>Bot�o</Text>
-  )
-}
 
 export default function App() {
   return (
@@ -113,21 +109,16 @@ export default function App() {
             <Drawer.Screen name="Home" component={Home} options={{
               drawerIcon: ({ color }) => (
                 <Ionicons name='home-outline' size={22} color={color} />
-              
+
               )
             }}/>
             <Drawer.Screen options={{headerShown: false}} name="Login" component={LoginScreen}options={{
               drawerIcon: ({ color }) => (
                 <Ionicons name='log-in-outline' size={22} color={color} />
-              
+
               )
             }}/>
-            <Drawer.Screen name="NewClient" component={NewClientScreen}options={{
-              drawerIcon: ({ color }) => (
-                <Ionicons name='person-add-outline' size={22} color={color} />
-              )
-            }}/>
-            
+
           </Drawer.Navigator>
         </NavigationContainer>
       </SessionProvider>
