@@ -9,7 +9,7 @@ const CustomDrawer = (props) => {
     <View style={styles.firstView}>
       <DrawerContentScrollView contentContainerStyle={{backgroundColor: '#694fad'}}>
         <ImageBackground source={require("../../images/menu-bg.jpeg")} style={styles.bgImage}>
-          <Image source={require("../../images/user-profile.jpg")} style={styles.profileImage} />
+          <Image source={require("../../images/profile.png")} style={styles.profileImage} />
           <Text style={styles.profileText}>Nome do Associado</Text>
           <Text style={styles.profileSubText}>CNPJ do Associado</Text>
         </ImageBackground>
