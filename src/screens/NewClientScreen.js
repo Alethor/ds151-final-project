@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Text, Input, Button} from 'react-native-elements';
+import { Input, Button} from 'react-native-elements';
 import { StyleSheet, Modal, Alert, View, Pressable } from "react-native"; 
 import deliveryApi from "../api/deliveryapi";
-import { AuthContext } from '../context/AuthContext';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Ionicons from '@expo/vector-icons/Ionicons'; 
-    
+import Icon from 'react-native-vector-icons/FontAwesome';    
 
 
 const NewClientScreen = ({ navigation }) => {
@@ -14,7 +12,6 @@ const NewClientScreen = ({ navigation }) => {
     const [cnpj, setCnpj] = useState("")
     const [address, setAddress] = useState("")  
     const [error, setError] = useState(false);
-    const { authState} = useContext(AuthContext);
 
     const insets = useSafeAreaInsets();
 
@@ -31,34 +28,57 @@ const NewClientScreen = ({ navigation }) => {
     }
     
     return(
+        <View style={styles.form}>        
         <View>
-        
-        <View style={styles.grid}>
             <Input 
-                placeholder = "Company Name"
-                style = {styles.textInput}
-                onChangeText={(name) => setCompany(name)}            
+                label="Company Name"
+                placeholder = "  Name"
+                style = {styles.textInput} 
+                leftIcon={
+                    <Icon
+                      name='user'
+                      size={21}
+                      color='orange'
+                    />
+                }  
+                onChangeText={(name) => setCompany(name)}         
             />
                         
             <Input 
-                placeholder = "Cnpj"
+                label="Cnpj"
+                placeholder = "  xxxxxxxxxxxxxx"
                 style = {styles.textInput}
-                onChangeText={(t) => setCnpj(t)}  
-                        
+                leftIcon={
+                    <Icon
+                      name='pencil'
+                      size={21}
+                      color='orange'
+                    />
+                }   
+                onChangeText={(t) => setCnpj(t)} 
             />
             <Input 
-                placeholder = "Address"
+                label= "Adress"
+                placeholder = "  Rua, 123"
                 style = {styles.textInput}
+                leftIcon={
+                    <Icon
+                      name='map'
+                      size={18}
+                      color='orange'
+                    />
+                } 
                 onChangeText={(ad) => setAddress(ad)}  
                        
             />               
         </View>
-                    
-        <Button 
-            title={"Confirmar"}
-            color="purple"
-            onPress={() => postClient()}>
-        </Button>
+        <View style={styles.confirm}>      
+        <Button
+          buttonStyle={styles.buttonLogin}
+          title="Confirmar"
+          onPress={postClient() }
+        />
+        </View> 
         </View> 
     ) 
     
@@ -67,9 +87,9 @@ const NewClientScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
 
 
-grid:{
-    marginTop:10,
-    marginBottom: 82
+form:{
+    flex: 1,
+    padding: 12,
 },
 
 containerView:{
@@ -93,10 +113,14 @@ containerTouchable:{
   marginRight: 50,
 },
 
-remove:{
-  marginLeft: 250,
-  marginTop: -55,
-},
+buttonLogin: {
+    backgroundColor: "orange",
+    borderRadius: 20,
+    padding: 10,
+    marginTop: 50,
+    width: 180,
+    alignSelf: 'center'
+  },
 
 textLabel:{
     fontSize: 16,

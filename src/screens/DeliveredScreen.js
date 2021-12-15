@@ -4,9 +4,6 @@ import { StyleSheet, Modal, Alert, Pressable, View, ActivityIndicator, FlatList,
 import deliveryApi from "../api/deliveryapi"; 
 
 
-
-
-
 const DeliveredScreen = ({ navigation }) => {
   const [deliveries, setDeliveries] = useState([]);
   const [loading, setLoading] = useState(true);
