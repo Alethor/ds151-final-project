@@ -12,23 +12,45 @@ const NewDeliveryScreen = ({ navigation }) => {
   const [clients, setClients] = useState([]);
   const [selectedClient, setSelectedClient] = useState({});
   const [selectedDeliveryman, setSelectedDeliveryman] = useState({});
+  const [description, setDescription] = useState('');
   const [erro, setErro] = useState(false);
   const [msgErro, setMsgErro] = useState('');
 
   const getClients = async () => {
-    let response = await deliveryApi.get("/client/listAllClientsByAssociate");
-    if(response){
-      setClients(response.data.clients);
+    try{
+      let response = await deliveryApi.get("/client/listAllClientsByAssociate");
+      if(response){
+        setClients(response.data.clients);
+      }
+    }catch(err){
+      console.log(err);
     }
-    console.log(clients);
   }
   const getDeliverymen = async () => {
-    let response = await deliveryApi.get("/deliveryman/listAllDeliveryMenByAssociate");
-    if(response){
-      setDeliverymen(response.data.deliveryMen);
+    try{
+
+      let response = await deliveryApi.get("/deliveryman/listAllDeliveryMenByAssociate");
+      if(response){
+        setDeliverymen(response.data.deliveryMen);
+      }
+    }catch(err){
+      console.log(err);
     }
-    console.log(deliverymen)
   }
+  
+  const createDelivery = async () => {
+    try{
+      await deliveryApi.post("/delivery/newDelivery", {
+        description: description,
+ 	      clientId: selectedClient.id,
+        deliveryManId: selectedDeliveryman.id
+      });
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+
 
   useEffect(() => {
     getClients(); 
@@ -69,10 +91,11 @@ const NewDeliveryScreen = ({ navigation }) => {
 	          }}
           />  
         </View>
-        <View>
-          <Text>{selectedClient.companyName}</Text>
-          <Text>{selectedDeliveryman.name}</Text>
-        </View>
+        <Input 
+          placeholder="Descrição"
+          onChangeText={(text) => {setDescription(text)}}
+        ></Input>
+        <Button buttonStyle={styles.buttonComponent} title="Criar" onPress={() => {createDelivery()}}></Button>
       </View>
     )
 
@@ -94,6 +117,13 @@ const styles = StyleSheet.create({
     height: 35,
 
   },  
+  buttonComponent:{
+    backgroundColor: "orange",
+    borderRadius: 20,
+    padding: 10,
+    width: 150,
+    alignSelf: 'center'
+  },
   textButton:{
     fontSize: 15,
 
