@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Input, Button} from 'react-native-elements';
-import { StyleSheet, Modal, TouchableOpacity, Alert, Pressable, View, ActivityIndicator, FlatList } from "react-native"; 
+import { StyleSheet, Modal, TouchableOpacity, Alert, View, FlatList, Pressable} from "react-native"; 
 import deliveryApi from "../api/deliveryapi";
 import Ionicons from '@expo/vector-icons/Ionicons'; 
 
@@ -8,12 +8,14 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 const ClientsScreen = ({ navigation }) => {
   const [clients, setClients] = useState([]);
+  const [alert, setAlert] = useState(false);
   
   async function getClients(){
     const responseClients = await deliveryApi.get("/client/listAllClientsByAssociate");
-    if(responseClients.data.clients){
+    if(responseClients){
       setClients(responseClients.data.clients);
     }
+    
   }
 
   useEffect(() => {
@@ -31,6 +33,7 @@ const ClientsScreen = ({ navigation }) => {
     }catch(e){
       console.log(e);
     }
+    setAlert(true);
     
   }
 
@@ -53,6 +56,28 @@ const ClientsScreen = ({ navigation }) => {
   
   return(
     <View style={styles.container}>
+      <View style={styles.centeredView} >
+        <Modal 
+          animationType="slide" 
+          transparent={true} 
+          visible={alert}
+          onRequestClose={() => {seAlert(!alert)}}>
+          
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalTextTitle} >Success!</Text>
+              <Text style={styles.modalText} >Client deleted</Text>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setAlert(false)}
+              >
+              <Text style={styles.textStyle}>Fechar</Text>
+            </Pressable>
+            </View>
+          </View>
+         
+         </Modal>
+       </View>
       <View style={styles.grid}>
         <FlatList
           data={clients}
@@ -124,6 +149,30 @@ containerView:{
     height: 105,
 
 },
+button: {
+  borderRadius: 20,
+  padding: 10,
+  elevation: 2,
+  width: 120,
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+buttonClose: {
+  backgroundColor: "#694fad",
+},
+modalText: {
+  marginBottom: 15,
+  textAlign: "center"
+},
+modalTextTitle: {
+  marginBottom: 15,
+  fontSize: 17,
+  textAlign: "center",
+  fontWeight: "bold"
+},
+textStyle:{
+  color: "white"
+},
 
 containerTouchable:{
   marginRight: 50,
@@ -176,7 +225,11 @@ modalView: {
   margin: 20,
   backgroundColor: "white",
   borderRadius: 20,
+  borderWidth: 1,
   padding: 35,
+  width: 320,
+  height: 170,
+  justifyContent: 'center',
   alignItems: "center",
   shadowColor: "#000",
   shadowOffset: {

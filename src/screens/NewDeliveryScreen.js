@@ -59,7 +59,7 @@ const NewDeliveryScreen = ({ navigation }) => {
   },[]);
 
     return(
-      <View>
+      <View style={styles.form}>
         <View>
           <Text style={styles.textLabel}>Client</Text>
           <SelectDropdown
@@ -117,6 +117,10 @@ const styles = StyleSheet.create({
     width: 250,
     height: 35,
 
+  },  
+  form:{
+    flex: 1,
+    padding: 15,
   },  
   buttonComponent:{
     backgroundColor: "orange",

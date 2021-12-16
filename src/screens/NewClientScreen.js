@@ -13,6 +13,7 @@ const NewClientScreen = ({ navigation }) => {
     const [cnpj, setCnpj] = useState("")
     const [address, setAddress] = useState("")  
     const [error, setError] = useState(false);
+   
 
     const insets = useSafeAreaInsets();
 
