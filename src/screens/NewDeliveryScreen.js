@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {Input, Button} from 'react-native-elements';
-import { StyleSheet, Modal, Alert, Pressable, View, ActivityIndicator, FlatList, Text } from "react-native"; 
+import { StyleSheet, Modal, Alert, TextInput, View, ActivityIndicator, FlatList, Text } from "react-native"; 
 import deliveryApi from "../api/deliveryapi"; 
 import SelectDropdown from 'react-native-select-dropdown'
 import * as RootNavigation from "../../RootNavigation";
-
+import Ionicons from '@expo/vector-icons/Ionicons'; 
 
 
 
@@ -51,8 +51,6 @@ const NewDeliveryScreen = ({ navigation }) => {
     RootNavigation.navigate("Pending");
   }
 
-
-
   useEffect(() => {
     getClients(); 
     getDeliverymen();
@@ -92,10 +90,14 @@ const NewDeliveryScreen = ({ navigation }) => {
 	          }}
           />  
         </View>
-        <Input 
-          placeholder="Descrição"
+        <Text style={styles.textLabel}>Descrição</Text>
+        <View style={styles.description}>
+        <TextInput 
+          placeholder="  Texto Texto Texto Texto"
           onChangeText={(text) => {setDescription(text)}}
-        ></Input>
+        ></TextInput>
+        </View>
+        
         <Button buttonStyle={styles.buttonComponent} title="Criar" onPress={() => {createDelivery()}}></Button>
       </View>
     )
@@ -111,11 +113,12 @@ const styles = StyleSheet.create({
     marginTop: 22
   },
   selectComponent:{
-    borderWidth: 1.5,
-    borderRadius: 20,
+    backgroundColor:"white",
+    borderWidth: 1,
+    borderRadius: 10,
     borderColor: 'orange',
-    width: 250,
-    height: 35,
+    width: 320,
+    height: 45,
 
   },  
   form:{
@@ -127,17 +130,28 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     width: 150,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginTop: 10
   },
   textButton:{
     fontSize: 15,
 
   },
   textLabel:{
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: 'bold',
+    marginTop:10
 
   },
+  
+  description:{
+    backgroundColor:"white",
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: 'orange',
+    width: 320,
+    height: 200,
+  }
 
 });
 
