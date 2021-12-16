@@ -50,8 +50,7 @@ const DeliveryMenScreen = ({ navigation }) => {
   }  
   
   return(
-    <View>
-
+    <View style={styles.container}>
       <View style={styles.grid}>
         <FlatList
           data={DeliveryMen}
@@ -85,7 +84,7 @@ const DeliveryMenScreen = ({ navigation }) => {
           >  
             <Ionicons name='add-circle' size={65} color='orange' />
           </TouchableOpacity>
-      </View> 
+        </View> 
       </View>
      
     </View> 
@@ -161,7 +160,9 @@ viewAviso:{
   justifyContent: "center",
   alignItems: "center",
 },
-
+container:{
+  flex: 1,
+},
 modalView: {
   margin: 20,
   backgroundColor: "white",
