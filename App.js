@@ -51,7 +51,7 @@ function Clients(){
 
 function Deliveryman(){
   return(
-    <Stack.Navigator initialRouteName="Deliverymen" screenOptions={{
+    <Stack.Navigator initialRouteName="DeliveryMen" screenOptions={{
       headerShown: false       
     }}>
       <Stack.Screen name="DeliveryMen" component={DeliveryMenScreen} />

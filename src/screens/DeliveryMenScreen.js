@@ -8,6 +8,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 const DeliveryMenScreen = ({ navigation }) => {
   const [DeliveryMen, setDeliveryMen] = useState([]);
+  const [alert, setAlert] = useState(false);
   
   async function getDeliveryMen(){
     const responseDeliveryMen = await deliveryApi.get("/deliveryman/listAllDeliveryMenByAssociate");
@@ -18,7 +19,10 @@ const DeliveryMenScreen = ({ navigation }) => {
   }
 
   useEffect(() => {
-    getDeliveryMen();  
+    navigation.addListener('focus', () => {
+      getDeliveryMen();
+    });
+      
   }, []);
 
 
@@ -29,6 +33,7 @@ const DeliveryMenScreen = ({ navigation }) => {
     }catch(e){
       console.log(e);
     }
+    setAlert(true);
     
   }
 
@@ -51,6 +56,28 @@ const DeliveryMenScreen = ({ navigation }) => {
   
   return(
     <View style={styles.container}>
+      <View style={styles.centeredView} >
+        <Modal 
+          animationType="slide" 
+          transparent={true} 
+          visible={alert}
+          onRequestClose={() => {setAlert(!alert)}}>
+          
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalTextTitle} >Success!</Text>
+              <Text style={styles.modalText} >Deliveryman deleted</Text>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setAlert(false)}
+              >
+              <Text style={styles.textStyle}>Fechar</Text>
+            </Pressable>
+            </View>
+          </View>
+         
+         </Modal>
+       </View>
       <View style={styles.grid}>
         <FlatList
           data={DeliveryMen}
@@ -163,11 +190,39 @@ viewAviso:{
 container:{
   flex: 1,
 },
+button: {
+  borderRadius: 20,
+  padding: 10,
+  elevation: 2,
+  width: 120,
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+buttonClose: {
+  backgroundColor: "#694fad",
+},
+modalText: {
+  marginBottom: 15,
+  textAlign: "center"
+},
+modalTextTitle: {
+  marginBottom: 15,
+  fontSize: 17,
+  textAlign: "center",
+  fontWeight: "bold"
+},
+textStyle:{
+  color: "white"
+},
 modalView: {
   margin: 20,
   backgroundColor: "white",
   borderRadius: 20,
+  borderWidth: 1,
   padding: 35,
+  width: 320,
+  height: 170,
+  justifyContent: 'center',
   alignItems: "center",
   shadowColor: "#000",
   shadowOffset: {

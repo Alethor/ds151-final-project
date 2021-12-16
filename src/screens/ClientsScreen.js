@@ -61,7 +61,7 @@ const ClientsScreen = ({ navigation }) => {
           animationType="slide" 
           transparent={true} 
           visible={alert}
-          onRequestClose={() => {seAlert(!alert)}}>
+          onRequestClose={() => {setAlert(!alert)}}>
           
           <View style={styles.centeredView}>
             <View style={styles.modalView}>

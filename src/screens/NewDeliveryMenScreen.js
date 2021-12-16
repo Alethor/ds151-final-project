@@ -2,7 +2,6 @@ import React, { useState, } from 'react';
 import { Input, Button} from 'react-native-elements';
 import { StyleSheet, View} from "react-native"; 
 import deliveryApi from "../api/deliveryapi";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Icon from 'react-native-vector-icons/FontAwesome';    
 import * as RootNavigation from "../../RootNavigation";
 
@@ -26,7 +25,7 @@ const NewDeliveryMenScreen = ({ navigation }) => {
       }catch(err){
         console.log(err);
       }
-      RootNavigation.navigate("NewDeliveryMen");
+      RootNavigation.navigate("DeliveryMen");
 
     }
     
@@ -35,7 +34,7 @@ const NewDeliveryMenScreen = ({ navigation }) => {
         <View>
             <Input 
                 label="Name"
-                placeholder = "  Name"
+                placeholder = " Name"
                 style = {styles.textInput} 
                 leftIcon={
                     <Icon
@@ -50,7 +49,7 @@ const NewDeliveryMenScreen = ({ navigation }) => {
                         
             <Input 
                 label="CPF"
-                placeholder = "  xxxxxxxxxxx"
+                placeholder = " xxxxxxxxxxx"
                 style = {styles.textInput}
                 leftIcon={
                     <Icon
@@ -64,7 +63,7 @@ const NewDeliveryMenScreen = ({ navigation }) => {
             />
             <Input 
                 label= " Phone"
-                placeholder = "  Rua, 123"
+                placeholder = " (XX) XXXXX-XXXX"
                 style = {styles.textInput}
                 leftIcon={
                     <Icon
@@ -79,7 +78,7 @@ const NewDeliveryMenScreen = ({ navigation }) => {
             />
             <Input 
                 label= " Password"
-                placeholder = "  XXXXXXX"
+                placeholder = " XXXXXXX"
                 secureTextEntry={true}
                 style = {styles.textInput}
                 leftIcon={
