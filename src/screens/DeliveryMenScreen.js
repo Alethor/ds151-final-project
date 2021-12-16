@@ -104,14 +104,14 @@ containerView:{
     flex: 1,
     alignSelf: 'center',
     marginTop: 5,   
-    padding: 5,
+    padding: 8,
     borderRadius: 10,
     backgroundColor: 'white',
     borderColor: 'orange',
     borderWidth: 1,
     alignContent: "center",
     width: 400,
-    height: 115,
+    height: 102,
 
 },
 
