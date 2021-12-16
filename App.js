@@ -19,6 +19,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { SessionProvider } from './src/context/SessionContext';
 import NewDeliveryScreen from './src/screens/NewDeliveryScreen';
 import DeliveryMenScreen from './src/screens/DeliveryMenScreen';
+import NewDeliveryMenScreen from './src/screens/NewDeliveryMenScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -54,7 +55,7 @@ function Deliveryman(){
       headerShown: false       
     }}>
       <Stack.Screen name="DeliveryMen" component={DeliveryMenScreen} />
-      <Stack.Screen name="NewDeliveryman" component={NewClientScreen} />
+      <Stack.Screen name="NewDeliveryMen" component={NewDeliveryMenScreen} />
     </Stack.Navigator>
   )
 }
