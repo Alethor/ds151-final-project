@@ -8,20 +8,19 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 const ClientsScreen = ({ navigation }) => {
   const [clients, setClients] = useState([]);
-  const [loading, setLoading] = useState(true);
   
   async function getClients(){
     const responseClients = await deliveryApi.get("/client/listAllClientsByAssociate");
     if(responseClients.data.clients){
       setClients(responseClients.data.clients);
     }
-    setLoading(false);
   }
 
   useEffect(() => {
-    setLoading(true);
-    getClients();
-    
+    navigation.addListener('focus', () => {
+      getClients();
+    });
+
   }, []);
 
 
@@ -53,24 +52,7 @@ const ClientsScreen = ({ navigation }) => {
   }  
   
   return(
-    <View>
-       <View style={styles.centeredView} >
-        <Modal 
-          animationType="slide" 
-          transparent={true} 
-          visible={loading}
-          onRequestClose={() => {setLoading(!loading)}}>
-          
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <ActivityIndicator size="large" color="#694fad" />
-              <Text style={styles.modalText} >Carregando...</Text>
-            </View>
-          </View>
-         
-         </Modal>
-       </View>
-
+    <View style={styles.container}>
       <View style={styles.grid}>
         <FlatList
           data={clients}
@@ -97,8 +79,7 @@ const ClientsScreen = ({ navigation }) => {
           }}
         >
         </FlatList>
-      </View>
-     <View>
+        <View>
           <TouchableOpacity
             style={styles.add1}
             onPress={() => navigation.navigate("NewClient")}
@@ -106,6 +87,9 @@ const ClientsScreen = ({ navigation }) => {
             <Ionicons name='add-circle' size={65} color='orange' />
           </TouchableOpacity>
       </View> 
+      </View>
+      
+     
     </View> 
   ) 
 }
@@ -115,9 +99,17 @@ const styles = StyleSheet.create({
 
 grid:{
     marginTop:10,
-    marginBottom: 82
+    marginBottom: 100
 },
 
+bottom: {
+  flex: 1,
+  justifyContent: 'flex-end',
+  marginBottom: 36
+},
+container:{
+  flex: 1,
+},
 containerView:{
     flex: 1,
     alignSelf: 'center',
@@ -149,16 +141,9 @@ add:{
 },
 
 add1:{
-  marginTop:100,
-  marginLeft:300
+  alignItems: 'flex-end',
 
 },
-
-add1:{
-
-  marginLeft:315
-},
-
 textLabel:{
     fontSize: 16,
     fontWeight: 'bold', 

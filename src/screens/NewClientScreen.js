@@ -4,6 +4,7 @@ import { StyleSheet, View} from "react-native";
 import deliveryApi from "../api/deliveryapi";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Icon from 'react-native-vector-icons/FontAwesome';    
+import * as RootNavigation from "../../RootNavigation";
 
 
 const NewClientScreen = ({ navigation }) => {
@@ -26,6 +27,7 @@ const NewClientScreen = ({ navigation }) => {
       }catch(err){
         console.log(err);
       }
+      RootNavigation.navigate("Client");
 
     }
     
@@ -38,6 +40,7 @@ const NewClientScreen = ({ navigation }) => {
                 style = {styles.textInput} 
                 leftIcon={
                     <Icon
+                      style={{paddingRight: 10}} 
                       name='user'
                       size={21}
                       color='orange'
@@ -52,6 +55,7 @@ const NewClientScreen = ({ navigation }) => {
                 style = {styles.textInput}
                 leftIcon={
                     <Icon
+                      style={{paddingRight: 10}} 
                       name='pencil'
                       size={21}
                       color='orange'
@@ -65,6 +69,7 @@ const NewClientScreen = ({ navigation }) => {
                 style = {styles.textInput}
                 leftIcon={
                     <Icon
+                      style={{paddingRight: 10}} 
                       name='map'
                       size={18}
                       color='orange'
