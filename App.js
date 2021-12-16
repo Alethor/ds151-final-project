@@ -18,6 +18,7 @@ import CustomDrawer from './src/components/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { SessionProvider } from './src/context/SessionContext';
 import NewDeliveryScreen from './src/screens/NewDeliveryScreen';
+import DeliveryMenScreen from './src/screens/DeliveryMenScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -52,7 +53,7 @@ function Deliveryman(){
     <Stack.Navigator initialRouteName="Deliverymen" screenOptions={{
       headerShown: false       
     }}>
-      <Stack.Screen name="Deliverymen" component={ColocarTelaAqui} />
+      <Stack.Screen name="DeliveryMen" component={DeliveryMenScreen} />
       <Stack.Screen name="NewDeliveryman" component={NewClientScreen} />
     </Stack.Navigator>
   )
