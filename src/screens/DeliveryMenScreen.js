@@ -78,8 +78,7 @@ const DeliveryMenScreen = ({ navigation }) => {
           }}
         >
         </FlatList>
-      </View>
-     <View>
+        <View>
           <TouchableOpacity
             style={styles.add1}
             onPress={() => navigation.navigate("NewDeliveryMen")}
@@ -87,6 +86,8 @@ const DeliveryMenScreen = ({ navigation }) => {
             <Ionicons name='add-circle' size={65} color='orange' />
           </TouchableOpacity>
       </View> 
+      </View>
+     
     </View> 
   ) 
 }
@@ -130,14 +131,7 @@ add:{
 },
 
 add1:{
-  marginTop:100,
-  marginLeft:300
-
-},
-
-add1:{
-
-  marginLeft:315
+  alignItems: 'flex-end',
 },
 
 textLabel:{
